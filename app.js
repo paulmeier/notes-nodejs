@@ -14,21 +14,21 @@ console.log("Yargs:", argv);
 
 if (command === "add") {
   var note = notes.addNote(argv.title, argv.body);
-  if (_.isUndefined(note)) {
-    console.log("Error: Note is a duplicate.");
-  } else {
+  if (note) {
     console.log("=== Note created ===");
     notes.logNote(note);
+  } else {
+    console.log("Error: Note is a duplicate.");
   }
 } else if (command === "list") {
   notes.getAll();
 } else if (command === "read") {
-  var returnedNote = notes.getNote(argv.title);
-  if (_.isUndefined(returnedNote)) {
-    console.log("Note not found");
-  } else {
+  var note = notes.getNote(argv.title);
+  if (note) {
     console.log("=== Note Found ===");
     notes.logNote(note);
+  } else {
+    console.log("Note not found!");
   }
 } else if (command === "remove") {
   var noteRemoved = notes.delNote(argv.title);

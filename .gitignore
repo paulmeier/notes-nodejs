@@ -21,4 +21,5 @@ yarn-error.log*
 
 deploy.js
 /playground
+notes-data.json
 
