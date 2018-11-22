@@ -1,6 +1,3 @@
-/* Notes app.js */
-console.log("starting app.js");
-
 const fs = require("fs");
 const _ = require("lodash");
 const yargs = require("yargs");
@@ -9,9 +6,6 @@ const notes = require("./notes.js");
 const argv = yargs.argv;
 
 var command = argv._[0];
-
-console.log("Command: ", command);
-console.log("Yargs:", argv);
 
 if (command === "add") {
   var note = notes.addNote(argv.title, argv.body);
@@ -22,7 +16,11 @@ if (command === "add") {
     console.log("Error: Note is a duplicate.");
   }
 } else if (command === "list") {
-  notes.getAll();
+  var noteList = notes.getAll();
+  console.log(`Printing ${noteList.length} note(s).`);
+  noteList.forEach((note) => {
+    notes.logNote(note);
+  });
 } else if (command === "read") {
   var note = notes.getNote(argv.title);
   if (note) {
